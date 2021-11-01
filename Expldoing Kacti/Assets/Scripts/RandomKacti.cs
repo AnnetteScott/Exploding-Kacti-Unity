@@ -54,6 +54,7 @@ public class RandomKacti : MonoBehaviour
         gameObject.AddComponent<MoveKacti>();
         gameObject.AddComponent<UserTouch>();
         gameObject.AddComponent<CircleCollider2D>();
+        gameObject.tag = "Cacti";
         //gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
 
         var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
