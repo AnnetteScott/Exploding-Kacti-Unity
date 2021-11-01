@@ -10,7 +10,7 @@ public class RandomKacti : MonoBehaviour
     {
         var gameObject = new GameObject("Cacti");
         var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        var sprite = Resources.Load<Sprite>("Textures/Kacti/normal_cacti");
+        var sprite = Resources.Load<Sprite>("Kacti/normal_cacti");
         spriteRenderer.sprite = sprite;
     }
     // Update is called once per frame
