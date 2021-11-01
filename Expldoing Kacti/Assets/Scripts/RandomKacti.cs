@@ -8,17 +8,23 @@ public class RandomKacti : MonoBehaviour
     public int[] bottomY = {-60, -70};
     public int[] rightX = {120, 130};
     public int[] leftX = {-120, -130};
+    public int CactiAllowed = 10;
+    public int CactiOnScreen = 0;
 
     Vector2 spawnPosition;
     // Start is called at the start
     void Start()
     {   
         spawnCacti();
+        CactiOnScreen += 1;
     }
     // Update is called once per frame
     void Update()
     {
-        
+        if(CactiOnScreen < CactiAllowed){
+            spawnCacti();
+            CactiOnScreen += 1;
+        }
     }
  
     Vector2 GetRandomPosition(){
