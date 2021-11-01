@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1783850285
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Cacti
+    uniqueID: 3864197199
+    locked: 0
+  - name: Over
+    uniqueID: 2403454469
     locked: 0
