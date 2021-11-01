@@ -10,7 +10,6 @@ public class RandomKacti : MonoBehaviour
     public int[] leftX = {-120, -130};
 
     Vector2 spawnPosition;
-
     // Start is called at the start
     void Start()
     {   
@@ -21,7 +20,7 @@ public class RandomKacti : MonoBehaviour
     {
         
     }
-
+ 
     Vector2 GetRandomPosition(){
         float randomX = 125;
         float randomY = 65;            
@@ -55,15 +54,11 @@ public class RandomKacti : MonoBehaviour
         gameObject.AddComponent<UserTouch>();
         gameObject.AddComponent<CircleCollider2D>();
         gameObject.tag = "Cacti";
-        //gameObject.GetComponent<CircleCollider2D>().isTrigger = true;
 
         var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         var sprite = Resources.Load<Sprite>("Kacti/normal_cacti");
         spriteRenderer.sprite = sprite;
-
     }
-
-    
 }
 
 

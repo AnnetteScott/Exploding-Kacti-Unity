@@ -23,10 +23,13 @@ public class UserTouch : MonoBehaviour
                Collider2D touchedCollider = Physics2D.OverlapPoint(touchPosition);
                if (col == touchedCollider){
                    explode = true;
-                   //Debug.Log("this was touched");
+                   Debug.Log("this was touched");
                }
                if (explode == true){
-                   Destroy(gameObject);
+                    Destroy(this.gameObject);
+                    ParticleSystem ps = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
+                    ps.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
+                    ps.Play();
                }
             }
         }
