@@ -43,6 +43,9 @@ TagManager:
   - name: Background
     uniqueID: 1783850285
     locked: 0
+  - name: Well
+    uniqueID: 1396206809
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

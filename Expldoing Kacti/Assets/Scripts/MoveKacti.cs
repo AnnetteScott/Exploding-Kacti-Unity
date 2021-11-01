@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MoveKacti : MonoBehaviour
 {
@@ -14,10 +15,17 @@ public class MoveKacti : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-       
+    {      
         if((Vector2)transform.position != wellpos){
             transform.position = Vector2.MoveTowards(transform.position, wellpos, speed * Time.deltaTime);
+        }
+    }
+    void OnTriggerEnter2D(Collider2D collision){
+        if(collision.tag == "Well"){
+            Destroy(this.gameObject);
+            ParticleSystem ps = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
+            ps.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
+            ps.Play();
         }
     }
 
