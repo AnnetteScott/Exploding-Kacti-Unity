@@ -13,22 +13,24 @@ public class MoveKacti : MonoBehaviour
     public float secondsToMaxDifficulty = 120;
     Vector2 wellpos;
     Collider2D col;
-    public GameObject restartPanel;
     
     // Start is called before the first frame update
     void Start()
     {
-        wellpos = new Vector2(11F, 5.5F);
+        wellpos = new Vector2(0, 0);
         col = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {      
-        // if(GameDynamics.playerHealth <= 0){
-        //     restartPanel.SetActive(true);
-        // }
-        // else {
+        if(GameDynamics.playerHealth <= 0){
+            GameDynamics.waterAmount = 5;
+            GameDynamics.playerHealth = 10;
+            GameDynamics.cactiOnScreen = 0;
+            SceneManager.LoadScene("RestartScene");
+        }
+        else {
             if((Vector2)transform.position != wellpos){
                 speed = Mathf.Lerp(minSpeed, maxSpeed, getDifficuiltyPercent());
                 transform.position = Vector2.MoveTowards(transform.position, wellpos, speed * Time.deltaTime);
@@ -57,7 +59,7 @@ public class MoveKacti : MonoBehaviour
                     }
                 }
             }
-        //}
+        }
     }
     void OnTriggerEnter2D(Collider2D collision){
         if(collision.tag == "Well"){

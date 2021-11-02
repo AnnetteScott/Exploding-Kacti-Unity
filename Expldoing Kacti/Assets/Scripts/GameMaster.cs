@@ -9,20 +9,8 @@ public class GameMaster : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }    
     
-    public void RestartGame(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }   
-    
     public void GoToMainMenu(){
         SceneManager.LoadScene("MainMenu");
     }
     
-    public void addWater(){
-        GameDynamics.waterAmount += 5;
-        if (GameDynamics.waterAmount > 10){
-            GameDynamics.waterAmount = 10;
-        }
-        Debug.Log("This ran");
-
-    }
 }
