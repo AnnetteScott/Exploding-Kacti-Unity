@@ -8,22 +8,18 @@ public class RandomKacti : MonoBehaviour
     private int[] bottomY = {-6, -11};
     private int[] rightX = {11, 16};
     private int[] leftX = {-11, -16};
-    public int CactiAllowed = 1;
-    public int CactiOnScreen = 0;
-
     Vector2 spawnPosition;
     // Start is called at the start
     void Start()
     {   
         spawnCacti();
-        CactiOnScreen += 1;
     }
     // Update is called once per frame
     void Update()
     {
-        if(CactiOnScreen < CactiAllowed){
+        if(GameDynamics.cactiOnScreen < GameDynamics.cactiAllowed){
             spawnCacti();
-            CactiOnScreen += 1;
+            GameDynamics.cactiOnScreen += 1;          
         }
     }
  
@@ -57,11 +53,10 @@ public class RandomKacti : MonoBehaviour
         gameObject.transform.localScale = new Vector3(1.2F, 1.2F, 1);
         gameObject.transform.position = new Vector3(spawnPosition[0], spawnPosition[1], 0);
         gameObject.AddComponent<MoveKacti>();
-        //gameObject.AddComponent<UserTouch>();
         gameObject.AddComponent<CircleCollider2D>();
         gameObject.tag = "Cacti";
-        var setTrigger = gameObject.GetComponent<CircleCollider2D>();
-        setTrigger.isTrigger = true;
+        var collider = gameObject.GetComponent<CircleCollider2D>();
+        collider.isTrigger = true;
 
         var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         var sprite = Resources.Load<Sprite>("Kacti/normal_cacti");
