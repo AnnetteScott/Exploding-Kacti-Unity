@@ -11,7 +11,7 @@ public class MoveKacti : MonoBehaviour
     Vector2 wellpos;
     Collider2D col;
 
-    private GameMaster gm;
+    private GameDynamics gm;
     
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class MoveKacti : MonoBehaviour
         wellpos = new Vector2(0, 0);
         col = GetComponent<Collider2D>();
         CactiHealthPoints();
-        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameDynamics>();
     }
 
     // Update is called once per frame
@@ -41,19 +41,21 @@ public class MoveKacti : MonoBehaviour
                     Collider2D touchedCollider = Physics2D.OverlapPoint(touchPosition);
                     if (col == touchedCollider){
                         if (GameDynamics.waterAmount > 0){
-                            health -= 1;
-                            GameDynamics.waterAmount -= 1;
-                            ParticleSystem wps = GameObject.Find("WaterParticle").GetComponent<ParticleSystem>();
-                            wps.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
-                            wps.Play();
-                            if (health <= 0){
+                            if(health > 1){
+                                health -= 1;
+                                GameDynamics.waterAmount -= 1;
+                                ParticleSystem wps = GameObject.Find("WaterParticle").GetComponent<ParticleSystem>();
+                                wps.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
+                                wps.Play();
+                            }
+                            else {
                                 Destroy(this.gameObject);
+                                GameDynamics.waterAmount -= 1;
                                 GameDynamics.cactiOnScreen -= 1;                    
                                 GameDynamics.scoreTotal += points;  
                                 ParticleSystem ps = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
                                 ps.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
                                 ps.Play();
-                                                  
                             }
                         }
                     }

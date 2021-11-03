@@ -6,17 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
-    public GameObject restartPanel;
-
-    public Text score;
-
-    public void Update(){
-        score.text = "Score: " + GameDynamics.scoreTotal.ToString();
-    } 
-
-    public void GameOver(){
-        Invoke("Delay", 1.2f);
-    }
     
     public void GoToGameScene(){
         GameDynamics.playerHealth = 10;
@@ -24,7 +13,6 @@ public class GameMaster : MonoBehaviour
         GameDynamics.cactiAllowed = 10;
         GameDynamics.waterAmount = 5;
         GameDynamics.scoreTotal = 0;
-        restartPanel.SetActive(false);
         SceneManager.LoadScene("GameScene");
     }    
     
@@ -32,8 +20,5 @@ public class GameMaster : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    void Delay(){
-        restartPanel.SetActive(true);
-    }
     
 }

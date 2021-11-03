@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameDynamics : MonoBehaviour
 {   
+    
+    public GameObject restartPanel;
+    public Text score;
+
+
     [System.NonSerialized]
     public static int playerHealth = 10;
     [System.NonSerialized]
@@ -19,7 +25,7 @@ public class GameDynamics : MonoBehaviour
     [System.NonSerialized]
     public static float minSpeed = 0.5F;
     [System.NonSerialized]
-    public static float maxSpeed = 2;
+    public static float maxSpeed = 3;
 
     [System.NonSerialized]
     public static string[] cactiTypesArr = {"normal_cacti", "left_cacti", "right_cacti", "dead_cacti", "tumbleweed", "fire_cacti"};
@@ -35,51 +41,50 @@ public class GameDynamics : MonoBehaviour
 
     GameObject heartSprite;
     GameObject wellSprite;
-    GameObject waterSprite;
     SpriteRenderer heartSpriteRenderer;
     SpriteRenderer wellSpriteRenderer;
-    SpriteRenderer waterSpriteRenderer;
-
 
     // Start is called before the first frame update
     void Start()
     {
         heartSprite = GameObject.FindGameObjectWithTag("Hearts");
-        wellSprite = GameObject.FindGameObjectWithTag("Well");
-        waterSprite = GameObject.FindGameObjectWithTag("Water");
-
         heartSpriteRenderer = heartSprite.GetComponent<SpriteRenderer>();
+        wellSprite = GameObject.FindGameObjectWithTag("Well");
         wellSpriteRenderer = wellSprite.GetComponent<SpriteRenderer>();
-        waterSpriteRenderer = waterSprite.GetComponent<SpriteRenderer>();
+        restartPanel.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        score.text = "Score: " + GameDynamics.scoreTotal.ToString();
         if(playerHealth > 10){
             playerHealth = 10;
         }
+        //Health and Well
         foreach(int health in number){
             if(health == playerHealth){
                 //Hearts
                 var heart = Resources.Load<Sprite>("Health/" + health);
                 heartSpriteRenderer.sprite = heart;
-                //Well
-                var well = Resources.Load<Sprite>("Well/" + health);
-                wellSpriteRenderer.sprite = well;
-                break;
             }
-        }
-        
+        }    
+        //Well water Level
         foreach(int water in number){
             if(water == waterAmount){
                 //Hearts
-                var waterImg = Resources.Load<Sprite>("Water/" + water);
-                waterSpriteRenderer.sprite = waterImg;
+                var waterImg = Resources.Load<Sprite>("WellWater/" + water);
+                wellSpriteRenderer.sprite = waterImg;
                 //Well
                 break;
             }
         }
     
+    }
+    void Delay(){
+        restartPanel.SetActive(true);
+    }
+    public void GameOver(){
+       Invoke("Delay", 1.2f);
     }
 }
