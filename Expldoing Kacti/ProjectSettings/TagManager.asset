@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Well
   - Cacti
+  - GM
   layers:
   - Default
   - TransparentFX
