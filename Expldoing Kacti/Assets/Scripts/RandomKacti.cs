@@ -47,9 +47,10 @@ public class RandomKacti : MonoBehaviour
         
     }
 
-    public void spawnCacti(){
+    public void spawnCacti(){  
+        var cacti = GetRandomCacti();
         spawnPosition = GetRandomPosition();
-        var gameObject = new GameObject("Cacti");
+        var gameObject = new GameObject(cacti);
         gameObject.transform.localScale = new Vector3(1.2F, 1.2F, 1);
         gameObject.transform.position = new Vector3(spawnPosition[0], spawnPosition[1], 0);
         gameObject.AddComponent<MoveKacti>();
@@ -58,10 +59,28 @@ public class RandomKacti : MonoBehaviour
         var collider = gameObject.GetComponent<CircleCollider2D>();
         collider.isTrigger = true;
 
+      
         var spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        var sprite = Resources.Load<Sprite>("Kacti/normal_cacti");
+        var sprite = Resources.Load<Sprite>("Kacti/" + cacti);
         spriteRenderer.sprite = sprite;
     }
+
+    
+    string GetRandomCacti(){
+        int randomNumber = Random.Range(1, 101);
+        string cactiType = "normal_cacti";
+        int counter = 0;
+        foreach(int index in GameDynamics.spawnChanceArr){
+            if (randomNumber <= index){
+                cactiType = GameDynamics.cactiTypesArr[counter];
+                break;
+            }
+            counter += 1;
+        }
+        return cactiType;
+        
+    }
+    
 }
 
 
