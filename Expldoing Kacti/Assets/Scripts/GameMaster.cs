@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
     public GameObject restartPanel;
 
-    
+    public Text score;
+
+    public void Update(){
+        score.text = "Score: " + GameDynamics.scoreTotal.ToString();
+    } 
+
     public void GameOver(){
         Invoke("Delay", 1.2f);
     }
