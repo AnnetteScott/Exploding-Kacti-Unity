@@ -48,11 +48,12 @@ public class MoveKacti : MonoBehaviour
                             wps.Play();
                             if (health <= 0){
                                 Destroy(this.gameObject);
+                                GameDynamics.cactiOnScreen -= 1;                    
+                                GameDynamics.scoreTotal += points;  
                                 ParticleSystem ps = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
                                 ps.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
                                 ps.Play();
-                                GameDynamics.cactiOnScreen -= 1;                    
-                                GameDynamics.scoreTotal += points;                    
+                                                  
                             }
                         }
                     }
