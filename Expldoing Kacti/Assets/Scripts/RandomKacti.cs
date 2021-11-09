@@ -17,9 +17,9 @@ public class RandomKacti : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameDynamics.cactiOnScreen < GameDynamics.cactiAllowed){
+        if(EndlessRunner.cactiOnScreen < EndlessSettings.cactiAllowed){
             spawnCacti();
-            GameDynamics.cactiOnScreen += 1;          
+            EndlessRunner.cactiOnScreen += 1;          
         }
     }
  
@@ -70,9 +70,9 @@ public class RandomKacti : MonoBehaviour
         int randomNumber = Random.Range(1, 101);
         string cactiType = "normal_cacti";
         int counter = 0;
-        foreach(int index in GameDynamics.spawnChanceArr){
+        foreach(int index in KactiSettings.spawnChanceArr){
             if (randomNumber <= index){
-                cactiType = GameDynamics.cactiTypesArr[counter];
+                cactiType = KactiSettings.cactiTypesArr[counter];
                 break;
             }
             counter += 1;

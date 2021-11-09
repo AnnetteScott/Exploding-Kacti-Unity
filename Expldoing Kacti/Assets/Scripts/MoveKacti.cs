@@ -11,7 +11,7 @@ public class MoveKacti : MonoBehaviour
     Vector2 wellpos;
     Collider2D col;
 
-    private GameDynamics gm;
+    private EndlessRunner gm;
     
     // Start is called before the first frame update
     void Start()
@@ -19,18 +19,18 @@ public class MoveKacti : MonoBehaviour
         wellpos = new Vector2(0, 0);
         col = GetComponent<Collider2D>();
         CactiHealthPoints();
-        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameDynamics>();
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<EndlessRunner>();
     }
 
     // Update is called once per frame
     void Update()
     {      
-        if(GameDynamics.playerHealth <= 0){
+        if(EndlessRunner.playerHealth <= 0){
             gm.GameOver();
         }
         else {
             if((Vector2)transform.position != wellpos){
-                speed = Mathf.Lerp(GameDynamics.minSpeed, GameDynamics.maxSpeed, getDifficuiltyPercent());
+                speed = Mathf.Lerp(EndlessSettings.minSpeed, EndlessSettings.maxSpeed, getDifficuiltyPercent());
                 transform.position = Vector2.MoveTowards(transform.position, wellpos, speed * Time.deltaTime);
             }
             if(Input.touchCount > 0){
@@ -40,19 +40,19 @@ public class MoveKacti : MonoBehaviour
                 if (touch.phase == TouchPhase.Began){
                     Collider2D touchedCollider = Physics2D.OverlapPoint(touchPosition);
                     if (col == touchedCollider){
-                        if (GameDynamics.waterAmount > 0){
+                        if (EndlessRunner.waterAmount > 0){
                             if(health > 1){
                                 health -= 1;
-                                GameDynamics.waterAmount -= 1;
+                                EndlessRunner.waterAmount -= 1;
                                 ParticleSystem wps = GameObject.Find("WaterParticle").GetComponent<ParticleSystem>();
                                 wps.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
                                 wps.Play();
                             }
                             else {
                                 Destroy(this.gameObject);
-                                GameDynamics.waterAmount -= 1;
-                                GameDynamics.cactiOnScreen -= 1;                    
-                                GameDynamics.scoreTotal += points;  
+                                EndlessRunner.waterAmount -= 1;
+                                EndlessRunner.cactiOnScreen -= 1;                    
+                                EndlessRunner.scoreTotal += points;  
                                 ParticleSystem ps = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
                                 ps.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
                                 ps.Play();
@@ -70,22 +70,22 @@ public class MoveKacti : MonoBehaviour
             ParticleSystem ps = GameObject.Find("Explosion").GetComponent<ParticleSystem>();
             ps.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, 0);
             ps.Play();
-            GameDynamics.playerHealth -= 1;
-            GameDynamics.cactiOnScreen -= 1;
+            EndlessRunner.playerHealth -= 1;
+            EndlessRunner.cactiOnScreen -= 1;
         }
     }
 
     float getDifficuiltyPercent(){
-        return Mathf.Clamp01(Time.timeSinceLevelLoad / GameDynamics.secondsToMaxDifficulty);
+        return Mathf.Clamp01(Time.timeSinceLevelLoad / EndlessSettings.secondsToMaxDifficulty);
     }
 
     void CactiHealthPoints(){
         string sprite = this.gameObject.name;
         int counter = 0;
-        foreach(string cactiName in GameDynamics.cactiTypesArr){
+        foreach(string cactiName in KactiSettings.cactiTypesArr){
             if (sprite == cactiName){
-                health = GameDynamics.cactiHealthArr[counter];
-                points = GameDynamics.cactiPointsArr[counter];
+                health = KactiSettings.cactiHealthArr[counter];
+                points = KactiSettings.cactiPointsArr[counter];
                 
                 break;
             }

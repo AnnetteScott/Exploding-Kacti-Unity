@@ -854,8 +854,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2040287132}
-        m_TargetAssemblyTypeName: GameMaster, Assembly-CSharp
-        m_MethodName: GoToGameScene
+        m_TargetAssemblyTypeName: GameScenes, Assembly-CSharp
+        m_MethodName: GoToEndlessMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1017,6 +1017,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2040287126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630b735e2668ca8448d2eced4b682f41, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ae5a0a101dd22049af34877df44c2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

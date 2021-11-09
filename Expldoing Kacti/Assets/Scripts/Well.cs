@@ -21,9 +21,9 @@ public class Well : MonoBehaviour
             if (touch.phase == TouchPhase.Began){
                 Collider2D touchedCollider = Physics2D.OverlapPoint(touchPosition);
                 if (col == touchedCollider){
-                    GameDynamics.waterAmount += 5;
-                    if (GameDynamics.waterAmount > 10){
-                        GameDynamics.waterAmount = 10;
+                    EndlessRunner.waterAmount += 5;
+                    if (EndlessRunner.waterAmount > 10){
+                        EndlessRunner.waterAmount = 10;
                     }
                 }
             }
