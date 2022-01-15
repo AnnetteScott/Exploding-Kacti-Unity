@@ -66,6 +66,7 @@ public class EndlessRunner : MonoBehaviour
     }
     void Delay(){
         restartPanel.SetActive(true);
+        score.color = Color.white;
     }
     public void GameOver(){
        Invoke("Delay", 1.2f);

@@ -1,5 +1,5 @@
 {
-    "m_SelectedDeviceId": "021507770403",
+    "m_SelectedDeviceId": "ofinvgemx4yh8dau",
     "m_SelectedPackage": {
         "deviceId": "",
         "name": "",
@@ -12,6 +12,12 @@
             "deviceId": "021507770403",
             "name": "com.unity3d.mobileremote",
             "processId": 18530,
+            "exited": false
+        },
+        {
+            "deviceId": "ofinvgemx4yh8dau",
+            "name": "com.unity3d.mobileremote",
+            "processId": 11584,
             "exited": false
         }
     ],
